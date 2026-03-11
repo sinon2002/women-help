@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Помощь женщинам</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+<div class="logo">💗 Помощь женщинам</div>
+
+<nav>
+<a href="#">О нас</a>
+<a href="#">Статьи</a>
+<a href="#">Поддержка</a>
+<button class="contact">Контакт</button>
+</nav>
+</header>
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Помощь женщинам <br> в трудных жизненных ситуациях</h1>
+
+<p>Мы рядом, чтобы помочь вам справиться с любыми трудностями.</p>
+
+<button onclick="openSurvey()">Заполнить анонимный опрос</button>
+
+</div>
+
+</section>
+
+
+<section class="services">
+
+<div class="card">
+<h3>Психологическая поддержка</h3>
+<p>Конфиденциальные консультации</p>
+</div>
+
+<div class="card">
+<h3>Юридическая помощь</h3>
+<p>Советы по правовым вопросам</p>
+</div>
+
+<div class="card">
+<h3>Группы поддержки</h3>
+<p>Сообщества для общения</p>
+</div>
+
+</section>
+
+
+<section class="help">
+
+<h2>Выход есть из любой ситуации</h2>
+
+<div class="help-grid">
+
+<div class="help-card">Личные истории</div>
+<div class="help-card">Полезные советы</div>
+<div class="help-card">Сеансы с психологом</div>
+
+</div>
+
+</section>
+
+
+<section class="survey-block">
+
+<h2>Пройдите анонимный опрос</h2>
+
+<button onclick="openSurvey()">Пройти опрос</button>
+
+</section>
+
+
+<footer>
+
+<p>© 2024 Помощь Женщинам</p>
+
+</footer>
+
+
+<div class="modal" id="survey">
+
+<div class="modal-content">
+
+<h3>Анонимный опрос</h3>
+
+<label>С какой проблемой вы столкнулись?</label>
+
+<select>
+<option>Стресс</option>
+<option>Проблемы в отношениях</option>
+<option>Насилие</option>
+<option>Одиночество</option>
+</select>
+
+<button onclick="closeSurvey()">Отправить</button>
+
+</div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
