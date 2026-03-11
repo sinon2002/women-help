@@ -96,45 +96,212 @@
 <div class="solution-left">
 
 <h2>Выход есть из любой ситуации</h2>
+<p class="solution-sub">Мы поможем вам найти решение.</p>
 
-<div class="support-item">💗 Личные истории</div>
-<div class="support-item">💬 Полезные советы</div>
-<div class="support-item">🎤 Сеансы с психологом</div>
+
+<div class="support-list">
+
+<!-- Личные истории -->
+
+<div class="support-item" onclick="toggleStories()">
+
+<div class="support-icon">
+<img src="images/heart.png">
+</div>
+
+<div class="support-text">
+<h4>Личные истории</h4>
+<p>Опыт других женщин</p>
+</div>
+
+<div class="support-arrow">›</div>
+
+</div>
+
+
+<div id="storiesBox" class="stories-box">
+
+<div class="story">
+<h3>Анонимная история</h3>
+<p>
+Я долго боялась рассказать о своей ситуации.
+Но когда я обратилась за помощью, моя жизнь начала меняться.
+</p>
+</div>
+
+<div class="story">
+<h3>Анонимная история</h3>
+<p>
+Мне казалось, что выхода нет.
+Но поддержка других женщин помогла мне начать новую жизнь.
+</p>
+</div>
+
+<div class="story">
+<h3>Анонимная история</h3>
+<p>
+Самое важное — найти людей, которые готовы поддержать.
+</p>
+</div>
+
+</div>
+
+
+<!-- Полезные советы -->
+
+<div class="support-item" onclick="toggleAdvice()">
+
+<div class="support-icon">
+<img src="images/chat.png">
+</div>
+
+<div class="support-text">
+<h4>Полезные советы</h4>
+<p>Рекомендации для сложных моментов</p>
+</div>
+
+<div class="support-arrow">›</div>
+
+</div>
+
+
+<div id="adviceBox" class="advice-box">
+
+<h3>Что делать при домашнем насилии</h3>
+
+<ul>
+<li>Постарайтесь найти безопасное место</li>
+<li>Свяжитесь с близкими или друзьями</li>
+<li>Обратитесь в кризисный центр</li>
+<li>Сохраните важные документы</li>
+<li>При угрозе жизни звоните в полицию</li>
+</ul>
+
+
+<h3>Если вы испытываете психологическое давление</h3>
+
+<ul>
+<li>Не вините себя</li>
+<li>Поговорите с людьми, которым доверяете</li>
+<li>Обратитесь к психологу</li>
+<li>Ведите записи происходящего</li>
+</ul>
+
+
+<h3>Если вы чувствуете сильный стресс</h3>
+
+<p>
+Попробуйте сделать паузу, поговорить с близкими,
+обратиться за профессиональной поддержкой
+и помнить, что вы не обязаны справляться со всем в одиночку.
+</p>
+
+</div>
+
+
+<!-- Сеансы с психологом -->
+
+<div class="support-item" onclick="openContact('psychologist')">
+
+<div class="support-icon">
+<img src="images/mic.png">
+</div>
+
+<div class="support-text">
+<h4>Сеансы с психологом</h4>
+<p>Индивидуальные консультации</p>
+</div>
+
+<div class="support-arrow">›</div>
+
+</div>
+
 
 </div>
 </div>
 
+
+<!-- Слайдер картинок -->
 
 <div class="image-slider">
 
-  <img src="images/img1.png" class="slide active">
-  <img src="images/img2.png" class="slide">
-  <img src="images/img3.png" class="slide">
+<img src="images/img1.png" class="slide active">
+<img src="images/img2.png" class="slide">
+<img src="images/img3.png" class="slide">
 
 </div>
 
+
+</div>
 </section>
 
 
-<section class="survey">
+<section class="survey-section">
 
-<h2>Пройдите анонимный опрос <br> и получите поддержку</h2>
+<div class="survey-content">
 
-<button onclick="openSurvey()" class="main-btn">
+<h2>Пройдите анонимный опрос<br>и получите поддержку</h2>
+
+<button class="survey-btn">
 Заполнить анонимный опрос
 </button>
 
+</div>
+
 </section>
 
 
-<footer>
 
-<div class="footer-links">
-<a href="#">Политика конфиденциальности</a>
-<a href="#">Помощь</a>
+<section class="video-section">
+
+<h2 id="videoTitle">История 1</h2>
+
+<div class="video-slider">
+
+<button class="video-btn left" onclick="prevVideo()">❮</button>
+
+<div class="video-container">
+
+<video id="storyVideo" controls autoplay muted>
+<source src="videos/video1.mp4" type="video/mp4">
+</video>
+
 </div>
 
-<p>© 2024 Помощь женщинам</p>
+<button class="video-btn right" onclick="nextVideo()">❯</button>
+
+</div>
+
+</section>
+
+<footer class="site-footer">
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<a href="#">Политика конфиденциальности</a>
+<span>|</span>
+<a href="#">Помощь</a>
+
+</div>
+
+
+<div class="footer-social">
+
+
+<a href="#"><img src="images/instagram.jpg"></a>
+<a href="#"><img src="images/telegram.jpg"></a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2024 Помощь Женщинам. Все права защищены.
+
+</div>
 
 </footer>
 
@@ -183,6 +350,8 @@
 </div>
 
 </div>
+
+
 
 </body>
 </html>
