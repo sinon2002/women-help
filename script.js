@@ -72,3 +72,85 @@ index = 0
 slides[index].classList.add("active")
 
 },4000)
+
+
+function toggleStories(){
+
+const box = document.getElementById("storiesBox")
+
+box.classList.toggle("active")
+
+}
+
+
+function toggleAdvice(){
+
+const box = document.getElementById("adviceBox")
+
+box.classList.toggle("active")
+
+}
+
+
+const videos = [
+{
+title:"История 1",
+src:"videos/video1.mp4"
+},
+
+{
+title:"История 2",
+src:"videos/video2.mp4"
+},
+
+{
+title:"История 3",
+src:"videos/video3.mp4"
+}
+
+]
+
+let videoIndex = 0
+
+const video = document.getElementById("storyVideo")
+const title = document.getElementById("videoTitle")
+
+function updateVideo(){
+
+video.src = videos[videoIndex].src
+title.textContent = videos[videoIndex].title
+
+video.load()
+video.play()
+
+}
+
+function nextVideo(){
+
+videoIndex++
+
+if(videoIndex >= videos.length){
+
+videoIndex = 0
+
+}
+
+updateVideo()
+
+}
+
+function prevVideo(){
+
+videoIndex--
+
+if(videoIndex < 0){
+
+videoIndex = videos.length - 1
+
+}
+
+updateVideo()
+
+}
+
+
