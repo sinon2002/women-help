@@ -1,5 +1,5 @@
 body{
-font-family: Arial;
+font-family:'Cinzel', serif;
 margin:0;
 background:#f9f3f5;
 color:#333;
@@ -8,30 +8,100 @@ color:#333;
 .header{
 display:flex;
 justify-content:space-between;
-padding:20px 60px;
-background:white;
 align-items:center;
+padding:15px 60px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
 .logo{
-font-size:20px;
-font-weight:bold;
-color:#d85c7b;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:22px;
+font-weight:600;
+color:#e86a87;
 }
 
+.logo-img{
+width:72px;
+height:72px;
+}
 .nav a{
 margin-right:20px;
 text-decoration:none;
 color:#555;
 }
 
-.contact{
+.contact-btn{
 background:#e87b93;
 border:none;
 padding:10px 20px;
 border-radius:8px;
 color:white;
 }
+
+.contact-wrapper {
+  position: relative;
+  display: inline-block; /* Позволяет элементам стоять в ряд */
+  vertical-align: middle; /* Выравнивает обертку по центру относительно текста */
+}
+
+.contact-dropdown{
+
+position:absolute;
+top:50px;
+right:0;
+
+background:white;
+
+border-radius:12px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
+padding:10px;
+
+display:none;
+
+min-width:220px;
+
+z-index:100;
+
+}
+
+.contact-item{
+
+display:block;
+
+padding:10px;
+
+text-decoration:none;
+
+color:#333;
+
+border-radius:8px;
+
+transition:0.2s;
+
+}
+
+.contact-item:hover{
+background:#f5f5f5;
+}
+
+
+.nav-container {
+  display: flex;
+  align-items: center; /* Центрирует и ссылку, и кнопку по вертикали */
+  gap: 15px;           /* Делает аккуратный отступ между ними */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333; /* Цвет как у ваших пунктов меню */
+}
+
+
 
 .hero{
 height:420px;
@@ -184,15 +254,14 @@ background:#f3e6ea;
 }
 
 .solution-container{
-
 display:flex;
 align-items:center;
 
-gap:60px;
+justify-content:flex-start;
 
-max-width:1100px;
+gap:20px;
 
-width:100%;
+max-width:1000px;
 
 }
 
@@ -222,11 +291,11 @@ display:flex;
 
 flex-direction:column;
 
-gap:15px;
+gap:12px;
 
-margin-top:25px;
+margin-top:20px;
 
-max-width:450px;
+max-width:420px;
 
 }
 
@@ -316,11 +385,10 @@ color:#aaa;
 
 .image-slider{
 
-flex:1;
 
-max-width:520px;
-
-height:360px;
+flex: 1;
+max-width:500px;
+height:320px;
 
 border-radius:20px;
 
@@ -330,45 +398,39 @@ box-shadow:0 20px 40px rgba(0,0,0,0.1);
 
 position:relative;
 
+
+margin-top: 100px;
 }
-
-.slide{
-
-position:absolute;
+.image-slider img{
 
 width:100%;
+
 height:100%;
 
 object-fit:cover;
 
+
+}
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
 opacity:0;
-
-transition:opacity 1s ease;
-
+transition:opacity 1s;
 }
 
 .slide.active{
-
 opacity:1;
-
 }
 
 .stories-box{
-
-max-height:0;
-
-overflow:hidden;
-
-transition:max-height 0.6s ease;
-
+display:none;
+margin-top:20px;
+padding:20px;
 background:white;
-
 border-radius:14px;
-
-margin-top:15px;
-
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
-
 }
 
 .stories-box.active{
@@ -646,29 +708,71 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.5);
 justify-content:center;
 align-items:center;
+z-index:1000;
 }
 
-.modal{
+.modal-box{
 
-display:none;
-position:fixed;
+background:white;
+padding:40px;
+border-radius:20px;
+width:420px;
+text-align:center;
+position:relative;
 
-top:0;
-left:0;
+box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
 
+.modal-close{
+
+position:absolute;
+top:15px;
+right:20px;
+font-size:28px;
+cursor:pointer;
+color:#999;
+}
+
+.modal-close:hover{
+color:black;
+}
+
+.modal-sub{
+color:#777;
+margin-bottom:25px;
+}
+
+.modal-btn{
+
+display:block;
 width:100%;
-height:100%;
+padding:16px;
+border-radius:12px;
+margin-bottom:15px;
+font-size:16px;
+text-decoration:none;
+font-weight:600;
+}
 
-background:rgba(0,0,0,0.4);
+.call-btn{
+background:#2d6cdf;
+color:white;
+}
 
-justify-content:center;
-align-items:center;
+.whatsapp-btn{
+background:#e6f3ec;
+color:#0a7f3f;
+}
 
-animation:fadeIn 0.4s;
+.modal-close-bottom{
 
+font-size:26px;
+margin-top:10px;
+cursor:pointer;
+color:#999;
 }
 
 .modal-content{
@@ -809,3 +913,193 @@ height:45px;
 }
 
 
+
+
+
+
+
+.faq-item{
+border-bottom:1px solid #eee;
+padding:10px;
+}
+
+
+
+.faq-answer{
+display:none;
+margin-top:5px;
+color:#555;
+}
+
+.faq-question{
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+padding:12px 0;
+font-weight:600;
+}
+
+.faq-arrow{
+transition:0.3s;
+color:#888;
+font-size:14px;
+}
+
+.faq-question.active .faq-arrow{
+transform:rotate(90deg);
+color:#e86c8a;
+}
+
+
+
+
+.telegram-btn{
+
+background:linear-gradient(90deg,#3aa0d8,#2f8fc3);
+color:white;
+font-weight:600;
+
+}
+
+.modal-divider{
+
+margin:15px 0;
+color:#999;
+font-size:14px;
+
+}
+
+.modal-question{
+
+width:100%;
+padding:14px;
+border-radius:12px;
+border:2px solid #ddd;
+background:white;
+font-size:16px;
+cursor:pointer;
+
+}
+
+.modal-question:hover{
+
+background:#f5f5f5;
+
+}
+
+.modal-cancel{
+
+margin-top:15px;
+color:#666;
+cursor:pointer;
+font-size:16px;
+
+}
+
+.modal-cancel:hover{
+
+color:black;
+
+}
+
+
+
+
+.about{
+padding:60px;
+}
+
+.about-container{
+
+display:flex;
+align-items:center;
+gap:40px;
+
+background:white;
+padding:40px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+.about-img{
+
+width:350px;
+border-radius:20px;
+
+}
+
+.about-text h2{
+margin-bottom:20px;
+color:#e86a87;
+}
+
+.about-text p{
+margin-bottom:15px;
+line-height:1.6;
+color:#444;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Делаем так, чтобы фон с бабочками был под контентом сайта */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Делаем бабочек ПОВЕРХ всего контента */
+  z-index: 9999; 
+  
+  /* ЭТО ГЛАВНОЕ: клики будут проходить сквозь бабочек на твой сайт */
+  pointer-events: none; 
+  
+  /* Убираем белый фон у канваса, чтобы видеть твой сайт */
+  background: transparent !important;
+}
+
+/* Если хочешь оставить подсказку про мышку */
+#help {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  color: #888;
+  font-family: sans-serif;
+}
