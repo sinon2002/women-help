@@ -1,0 +1,294 @@
+<link rel="stylesheet" href="style.css">
+<header class="header">
+<div class="logo">
+<img src="images/logo.png" class="logo-img">
+<span>Помощь Женщинам</span>
+</div>
+
+<nav>
+<a href="index.html">Главная</a>
+<a href="about.html">О нас</a>
+<div class="contact-wrapper">
+
+<button class="contact-btn" onclick="toggleContacts()">
+Контакт
+</button>
+
+<div class="contact-dropdown" id="contactDropdown">
+
+<a href="tel:+996 503 200 212" class="contact-item">
+📞 +996 503 200 212
+</a>
+
+<a href="https://t.me/@Sanabar02" target="_blank" class="contact-item">
+💬 Написать в Telegram
+</a>
+
+</nav>
+</header>
+
+<section class="about">
+
+<div class="about-container">
+
+<img src="images/team.jpg" class="about-img">
+
+<div class="about-text">
+<h2>О нашей организации</h2>
+
+<p>
+Мы — команда, которая помогает девушкам и женщинам,
+оказавшимся в трудной жизненной ситуации.
+</p>
+
+<p>
+Мы оказываем поддержку при домашнем насилии,
+психологическом давлении, насилии в семье и других
+сложных ситуациях — независимо от возраста.
+</p>
+
+<p>
+Наша цель — дать безопасность, поддержку и выход.
+Ты не одна ❤️
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="services">
+
+<div class="card" onclick="openContact('psychologist')">
+
+<div class="icon-box">
+<img src="heart.png">
+</div>
+
+<div class="card-text">
+<h3>Психологическая поддержка</h3>
+<p>Конфиденциальные консультации и поддержка</p>
+</div>
+
+</div>
+
+
+<div class="card" onclick="openContact('lawyer')">
+
+<div class="icon-box">
+<img src="scale.png">
+</div>
+
+<div class="card-text">
+<h3>Юридическая помощь</h3>
+<p>Советы по правовым вопросам и защите</p>
+</div>
+
+</div>
+
+
+<div class="card" onclick="openContact('group')">
+
+<div class="icon-box">
+<img src="group.png">
+</div>
+
+<div class="card-text">
+<h3>Группы поддержки</h3>
+<p>Сообщества для общения</p>
+</div>
+
+</div>
+
+</div>
+
+<section class="solution-section">
+
+<div class="solution-container">
+
+<div class="solution-left">
+
+<h2>Выход есть из любой ситуации</h2>
+<p class="solution-sub">Мы поможем вам найти решение.</p>
+
+
+<div class="support-list">
+
+<!-- Личные истории -->
+
+<div class="support-item" onclick="toggleStories()">
+
+<div class="support-icon">
+<img src="images/heart.png">
+</div>
+
+<div class="support-text">
+<h4>Личные истории</h4>
+<p>Опыт других женщин</p>
+</div>
+
+<div class="support-arrow">›</div>
+
+</div>
+
+
+
+
+<div id="storiesBox" class="stories-box">
+
+
+
+</div>
+
+
+<!-- Полезные советы -->
+
+<div class="support-item" onclick="toggleAdvice()">
+
+<div class="support-icon">
+<img src="images/chat.png">
+</div>
+
+<div class="support-text">
+<h4>Полезные советы</h4>
+<p>Рекомендации для сложных моментов</p>
+</div>
+
+<div class="support-arrow">›</div>
+
+</div>
+
+
+<div id="adviceBox" style="display:none;">
+
+<div class="faq-item">
+<div class="faq-question"><span>Что делать при домашнем насилии?</span>
+
+<span class="faq-arrow">▶</span> 
+
+</div>
+
+<div class="faq-answer">Постарайтесь найти безопасное место и обратитесь за помощью.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">Если есть психологическое давление</div>
+<div class="faq-answer">Поговорите с близкими или обратитесь к психологу.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">Если сильный стресс</div>
+<div class="faq-answer">Попробуйте сделать паузу и поговорить с людьми, которым доверяете.</div>
+</div>
+
+</div>
+
+
+<!-- Сеансы с психологом -->
+<div class="support-item" onclick="openContact('psychologist')">
+
+<div class="support-icon">
+<img src="images/mic.png">
+</div>
+
+<div class="support-text">
+<h4>Сеансы с психологом</h4>
+<p>Индивидуальные консультации</p>
+</div>
+
+<div class="support-arrow">›</div>
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Слайдер картинок -->
+
+<div class="image-slider">
+
+<img src="images/img1.png" class="slide active">
+<img src="images/img2.png" class="slide">
+<img src="images/img3.png" class="slide">
+
+
+</div>
+
+
+
+</section>
+
+<section class="survey-section">
+
+<div class="survey-content">
+
+<h2>Пройдите анонимный опрос<br>и получите поддержку</h2>
+
+<a href="https://docs.google.com/forms/d/1EJzlz4dd8uilu3KuuUYbJLRFFSW1TfFPAczlOwuWcYY/edit" target="_blank">
+<button class="survey-btn">
+Заполнить анонимный опрос
+</button>
+
+</div>
+
+</section>
+
+<footer class="site-footer">
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<a href="#">Политика конфиденциальности</a>
+<span>|</span>
+<a href="#">Помощь</a>
+
+</div>
+
+
+<div class="footer-social">
+
+
+<a href="#"><img src="images/instagram.jpg"></a>
+<a href="#"><img src="images/telegram.jpg"></a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2024 Помощь Женщинам. Все права защищены.
+
+</div>
+
+</footer>
+
+<script type="module" src="script.js"></script>
+<div id="contactModal" class="modal">
+
+<div class="modal-box">
+
+<span class="modal-close" onclick="closeModal()">×</span>
+
+<h2 id="modalTitle"></h2>
+
+<p class="modal-sub">Выберите удобный способ связи</p>
+
+<div id="modalBody"></div>
+
+<div class="modal-close-bottom" onclick="closeModal()">×</div>
+
+</div>
+
+</div>
