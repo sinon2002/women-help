@@ -1,5 +1,5 @@
 import { initializeApp } from "supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files";
-
+console.log("JS ЗАГРУЗИЛСЯ");
 import {
   getFirestore,
   collection,
