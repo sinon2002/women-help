@@ -170,21 +170,47 @@ window.editFAQ = async function (id, q, a) {
 // =======================
 
 window.addVideo = async function () {
-  const title = document.getElementById("videoTitleInput").value;
-  const url = document.getElementById("videoUrlInput").value;
 
-  if (!title || !url) {
-    alert("Заполните все поля");
+  const title = document.getElementById("videoTitleInput").value;
+  const file = document.getElementById("videoFileInput").files[0];
+  const urlInput = document.getElementById("videoUrlInput").value;
+
+  if (!title) {
+    alert("Введите название");
+    return;
+  }
+
+  let finalUrl = "";
+
+  // 📁 ЕСЛИ ФАЙЛ
+  if (file) {
+    const storageRef = ref(storage, "videos/" + Date.now() + "_" + file.name);
+
+    await uploadBytes(storageRef, file);
+
+    finalUrl = await getDownloadURL(storageRef);
+  }
+
+  // 🔗 ЕСЛИ URL
+  else if (urlInput) {
+    finalUrl = urlInput;
+  }
+
+  else {
+    alert("Добавьте файл или ссылку");
     return;
   }
 
   await addDoc(collection(db, "videos"), {
-    title,
-    url
+    title: title,
+    url: finalUrl
   });
+
+  alert("Видео добавлено!");
 
   document.getElementById("videoTitleInput").value = "";
   document.getElementById("videoUrlInput").value = "";
+  document.getElementById("videoFileInput").value = "";
 
   loadData();
 };
