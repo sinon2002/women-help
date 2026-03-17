@@ -1,86 +1,241 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getFirestore,
-collection,
-addDoc
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-
-
 const firebaseConfig = {
-apiKey: "AIzaSyAGgvhJJguOe-5NPjzCCeCYqGuXr3MxxTE",
-authDomain: "women-support-488a3.firebaseapp.com",
-projectId: "women-support-488a3",
-storageBucket: "women-support-488a3.appspot.com",
-messagingSenderId: "333591134994",
-appId: "1:333591134994:web:d4e0f4a579e3fa578ca9cb"
+  apiKey: "AIzaSyAGgvhJJguOe-5NPjzCCeCYqGuXr3MxxTE",
+  authDomain: "women-support-488a3.firebaseapp.com",
+  projectId: "women-support-488a3",
+  storageBucket: "women-support-488a3.appspot.com",
+  messagingSenderId: "333591134994",
+  appId: "1:333591134994:web:d4e0f4a579e3fa578ca9cb"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-window.addStory = async function(){
 
-const text = document.getElementById("storyText").value;
+// =======================
+// 📊 ЗАГРУЗКА ВСЕГО
+// =======================
 
-if(text === ""){
-alert("Введите историю");
-return;
+window.loadData = async function () {
+  const storiesSnap = await getDocs(collection(db, "stories"));
+  const faqSnap = await getDocs(collection(db, "faq"));
+  const videosSnap = await getDocs(collection(db, "videos"));
+
+  // 📊 счетчики
+  document.getElementById("storiesCount").innerText = storiesSnap.size;
+  document.getElementById("faqCount").innerText = faqSnap.size;
+  document.getElementById("videosCount").innerText = videosSnap.size;
+
+  renderStories(storiesSnap);
+  renderFAQ(faqSnap);
+  renderVideos(videosSnap);
+};
+
+
+// =======================
+// 📚 STORIES
+// =======================
+
+window.addStory = async function () {
+  const text = document.getElementById("storyText").value;
+
+  if (!text) {
+    alert("Введите историю");
+    return;
+  }
+
+  await addDoc(collection(db, "stories"), { text });
+
+  document.getElementById("storyText").value = "";
+  loadData();
+};
+
+function renderStories(snapshot) {
+  const list = document.getElementById("storiesList");
+  list.innerHTML = "";
+
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+
+    list.innerHTML += `
+      <div class="item">
+        <p>${data.text}</p>
+        <button onclick="deleteStory('${docSnap.id}')">🗑</button>
+        <button onclick="editStory('${docSnap.id}', '${data.text}')">✏️</button>
+      </div>
+    `;
+  });
 }
 
-await addDoc(collection(db,"stories"),{
-text:text
-});
+window.deleteStory = async function (id) {
+  await deleteDoc(doc(db, "stories", id));
+  loadData();
+};
 
-document.getElementById("status").innerText="История добавлена!";
-document.getElementById("storyText").value="";
+window.editStory = async function (id, oldText) {
+  const newText = prompt("Редактировать:", oldText);
+  if (!newText) return;
 
+  await updateDoc(doc(db, "stories", id), {
+    text: newText
+  });
+
+  loadData();
+};
+
+
+// =======================
+// 💡 FAQ
+// =======================
+
+window.addFAQ = async function () {
+  const question = document.getElementById("faqQuestion").value;
+  const answer = document.getElementById("faqAnswer").value;
+
+  if (!question || !answer) {
+    alert("Введите вопрос и ответ");
+    return;
+  }
+
+  await addDoc(collection(db, "faq"), {
+    question,
+    answer
+  });
+
+  document.getElementById("faqQuestion").value = "";
+  document.getElementById("faqAnswer").value = "";
+
+  loadData();
+};
+
+function renderFAQ(snapshot) {
+  const list = document.getElementById("faqList");
+  list.innerHTML = "";
+
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+
+    list.innerHTML += `
+      <div class="item">
+        <b>${data.question}</b>
+        <p>${data.answer}</p>
+        <button onclick="deleteFAQ('${docSnap.id}')">🗑</button>
+        <button onclick="editFAQ('${docSnap.id}', '${data.question}', '${data.answer}')">✏️</button>
+      </div>
+    `;
+  });
 }
 
+window.deleteFAQ = async function (id) {
+  await deleteDoc(doc(db, "faq", id));
+  loadData();
+};
+
+window.editFAQ = async function (id, q, a) {
+  const newQ = prompt("Вопрос:", q);
+  const newA = prompt("Ответ:", a);
+
+  if (!newQ || !newA) return;
+
+  await updateDoc(doc(db, "faq", id), {
+    question: newQ,
+    answer: newA
+  });
+
+  loadData();
+};
 
 
+// =======================
+// 🎥 VIDEO
+// =======================
 
+window.addVideo = async function () {
+  const title = document.getElementById("videoTitleInput").value;
+  const url = document.getElementById("videoUrlInput").value;
 
-window.addFAQ = async function(){
+  if (!title || !url) {
+    alert("Заполните все поля");
+    return;
+  }
 
-const question = document.getElementById("faqQuestion").value
-const answer = document.getElementById("faqAnswer").value
+  await addDoc(collection(db, "videos"), {
+    title,
+    url
+  });
 
-if(question === "" || answer === ""){
-alert("Введите вопрос и ответ")
-return
+  document.getElementById("videoTitleInput").value = "";
+  document.getElementById("videoUrlInput").value = "";
+
+  loadData();
+};
+
+function renderVideos(snapshot) {
+  const list = document.getElementById("videosList");
+  list.innerHTML = "";
+
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+
+    list.innerHTML += `
+      <div class="item">
+        <b>${data.title}</b>
+        <p>${data.url}</p>
+        <button onclick="deleteVideo('${docSnap.id}')">🗑</button>
+        <button onclick="editVideo('${docSnap.id}', '${data.title}', '${data.url}')">✏️</button>
+      </div>
+    `;
+  });
 }
 
-await addDoc(collection(db,"faq"),{
-question:question,
-answer:answer
-})
+window.deleteVideo = async function (id) {
+  await deleteDoc(doc(db, "videos", id));
+  loadData();
+};
 
-document.getElementById("faqStatus").innerText="Совет добавлен!"
+window.editVideo = async function (id, title, url) {
+  const newTitle = prompt("Название:", title);
+  const newUrl = prompt("URL:", url);
 
-document.getElementById("faqQuestion").value=""
-document.getElementById("faqAnswer").value=""
+  if (!newTitle || !newUrl) return;
 
-}
+  await updateDoc(doc(db, "videos", id), {
+    title: newTitle,
+    url: newUrl
+  });
+
+  loadData();
+};
 
 
-window.addVideo = async function(){
+// =======================
+// 📂 ВКЛАДКИ
+// =======================
 
-const title = document.getElementById("videoTitleInput").value
-const url = document.getElementById("videoUrlInput").value
+window.showTab = function (tabId) {
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.style.display = "none";
+  });
 
-if(!title || !url){
-alert("Заполните все поля")
-return
-}
+  document.getElementById(tabId).style.display = "block";
+};
 
-await addDoc(collection(db,"videos"),{
-title: title,
-url: url
-})
 
-alert("Видео добавлено!")
+// =======================
+// 🚀 СТАРТ
+// =======================
 
-}
+window.onload = function () {
+  loadData();
+};
