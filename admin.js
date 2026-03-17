@@ -9,15 +9,18 @@ import {
   doc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+// 🔥 SUPABASE
+import { createClient } from 'https://supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files'
+
+// 👉 ВСТАВЬ СВОИ ДАННЫЕ
+const supabaseUrl = 'rinzrphvqbdjgascgymv'
+const supabaseKey = 'sb_publishable_nqjEWqg2glLj2VAm58KkeQ_GMnGXss9'
+
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 
-const storage = getStorage(app);
+// 🔥 FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyAGgvhJJguOe-5NPjzCCeCYqGuXr3MxxTE",
   authDomain: "women-support-488a3.firebaseapp.com",
@@ -32,7 +35,7 @@ const db = getFirestore(app);
 
 
 // =======================
-// 📊 ЗАГРУЗКА ВСЕГО
+// 📊 ЗАГРУЗКА
 // =======================
 
 window.loadData = async function () {
@@ -40,7 +43,6 @@ window.loadData = async function () {
   const faqSnap = await getDocs(collection(db, "faq"));
   const videosSnap = await getDocs(collection(db, "videos"));
 
-  // 📊 счетчики
   document.getElementById("storiesCount").innerText = storiesSnap.size;
   document.getElementById("faqCount").innerText = faqSnap.size;
   document.getElementById("videosCount").innerText = videosSnap.size;
@@ -58,10 +60,7 @@ window.loadData = async function () {
 window.addStory = async function () {
   const text = document.getElementById("storyText").value;
 
-  if (!text) {
-    alert("Введите историю");
-    return;
-  }
+  if (!text) return alert("Введите историю");
 
   await addDoc(collection(db, "stories"), { text });
 
@@ -80,7 +79,7 @@ function renderStories(snapshot) {
       <div class="item">
         <p>${data.text}</p>
         <button onclick="deleteStory('${docSnap.id}')">🗑</button>
-        <button onclick="editStory('${docSnap.id}', '${data.text}')">✏️</button>
+        <button onclick="editStory('${docSnap.id}', \`${data.text}\`)">✏️</button>
       </div>
     `;
   });
@@ -95,10 +94,7 @@ window.editStory = async function (id, oldText) {
   const newText = prompt("Редактировать:", oldText);
   if (!newText) return;
 
-  await updateDoc(doc(db, "stories", id), {
-    text: newText
-  });
-
+  await updateDoc(doc(db, "stories", id), { text: newText });
   loadData();
 };
 
@@ -108,17 +104,14 @@ window.editStory = async function (id, oldText) {
 // =======================
 
 window.addFAQ = async function () {
-  const question = document.getElementById("faqQuestion").value;
-  const answer = document.getElementById("faqAnswer").value;
+  const q = document.getElementById("faqQuestion").value;
+  const a = document.getElementById("faqAnswer").value;
 
-  if (!question || !answer) {
-    alert("Введите вопрос и ответ");
-    return;
-  }
+  if (!q || !a) return alert("Введите данные");
 
   await addDoc(collection(db, "faq"), {
-    question,
-    answer
+    question: q,
+    answer: a
   });
 
   document.getElementById("faqQuestion").value = "";
@@ -139,7 +132,7 @@ function renderFAQ(snapshot) {
         <b>${data.question}</b>
         <p>${data.answer}</p>
         <button onclick="deleteFAQ('${docSnap.id}')">🗑</button>
-        <button onclick="editFAQ('${docSnap.id}', '${data.question}', '${data.answer}')">✏️</button>
+        <button onclick="editFAQ('${docSnap.id}', \`${data.question}\`, \`${data.answer}\`)">✏️</button>
       </div>
     `;
   });
@@ -166,7 +159,7 @@ window.editFAQ = async function (id, q, a) {
 
 
 // =======================
-// 🎥 VIDEO
+// 🎥 VIDEO (🔥 SUPABASE)
 // =======================
 
 window.addVideo = async function () {
@@ -175,34 +168,42 @@ window.addVideo = async function () {
   const file = document.getElementById("videoFileInput").files[0];
   const urlInput = document.getElementById("videoUrlInput").value;
 
-  if (!title) {
-    alert("Введите название");
-    return;
-  }
+  if (!title) return alert("Введите название");
 
   let finalUrl = "";
 
-  // 📁 ЕСЛИ ФАЙЛ
+  // 📁 загрузка файла через Supabase
   if (file) {
-    const storageRef = ref(storage, "videos/" + Date.now() + "_" + file.name);
 
-    await uploadBytes(storageRef, file);
+    const fileName = Date.now() + "_" + file.name;
 
-    finalUrl = await getDownloadURL(storageRef);
+    const { error } = await supabase.storage
+      .from('videos')
+      .upload(fileName, file);
+
+    if (error) {
+      alert("Ошибка загрузки");
+      console.log(error);
+      return;
+    }
+
+    finalUrl = supabase
+      .storage
+      .from('videos')
+      .getPublicUrl(fileName).data.publicUrl;
   }
 
-  // 🔗 ЕСЛИ URL
+  // 🔗 ссылка
   else if (urlInput) {
     finalUrl = urlInput;
   }
 
   else {
-    alert("Добавьте файл или ссылку");
-    return;
+    return alert("Добавьте файл или ссылку");
   }
 
   await addDoc(collection(db, "videos"), {
-    title: title,
+    title,
     url: finalUrl
   });
 
@@ -225,9 +226,10 @@ function renderVideos(snapshot) {
     list.innerHTML += `
       <div class="item">
         <b>${data.title}</b>
-        <p>${data.url}</p>
+        <video width="300" controls src="${data.url}"></video>
+        <br>
         <button onclick="deleteVideo('${docSnap.id}')">🗑</button>
-        <button onclick="editVideo('${docSnap.id}', '${data.title}', '${data.url}')">✏️</button>
+        <button onclick="editVideo('${docSnap.id}', \`${data.title}\`, \`${data.url}\`)">✏️</button>
       </div>
     `;
   });
@@ -250,19 +252,6 @@ window.editVideo = async function (id, title, url) {
   });
 
   loadData();
-};
-
-
-// =======================
-// 📂 ВКЛАДКИ
-// =======================
-
-window.showTab = function (tabId) {
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.style.display = "none";
-  });
-
-  document.getElementById(tabId).style.display = "block";
 };
 
 
