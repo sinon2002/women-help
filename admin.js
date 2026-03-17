@@ -1,5 +1,6 @@
-import { initializeApp } from "supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files";
-console.log("JS ЗАГРУЗИЛСЯ");
+// 🔥 FIREBASE
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import {
   getFirestore,
   collection,
@@ -8,19 +9,19 @@ import {
   deleteDoc,
   doc,
   updateDoc
-} from "supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// 🔥 SUPABASE
-import { createClient } from 'https://supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files'
+// 🔥 SUPABASE (ПРАВИЛЬНЫЙ ИМПОРТ)
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
 // 👉 ВСТАВЬ СВОИ ДАННЫЕ
-const supabaseUrl = 'rinzrphvqbdjgascgymv'
+const supabaseUrl = 'https://rinzrphvqbdjgasccgymv.supabase.co'
 const supabaseKey = 'sb_publishable_nqjEWqg2glLj2VAm58KkeQ_GMnGXss9'
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 
-// 🔥 FIREBASE
+// 🔥 FIREBASE CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyAGgvhJJguOe-5NPjzCCeCYqGuXr3MxxTE",
   authDomain: "women-support-488a3.firebaseapp.com",
@@ -159,7 +160,7 @@ window.editFAQ = async function (id, q, a) {
 
 
 // =======================
-// 🎥 VIDEO (🔥 SUPABASE)
+// 🎥 VIDEO (SUPABASE)
 // =======================
 
 window.addVideo = async function () {
@@ -172,9 +173,7 @@ window.addVideo = async function () {
 
   let finalUrl = "";
 
-  // 📁 загрузка файла через Supabase
   if (file) {
-
     const fileName = Date.now() + "_" + file.name;
 
     const { error } = await supabase.storage
@@ -193,7 +192,6 @@ window.addVideo = async function () {
       .getPublicUrl(fileName).data.publicUrl;
   }
 
-  // 🔗 ссылка
   else if (urlInput) {
     finalUrl = urlInput;
   }
