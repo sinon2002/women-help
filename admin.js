@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp } from "supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files";
 
 import {
   getFirestore,
@@ -8,7 +8,7 @@ import {
   deleteDoc,
   doc,
   updateDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files";
 
 // 🔥 SUPABASE
 import { createClient } from 'https://supabase.com/dashboard/project/rinzrphvqbdjgascgymv/storage/files'
