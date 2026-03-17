@@ -5,112 +5,180 @@
 <title>Админ панель</title>
 
 <style>
-  body {
+body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   display: flex;
+  background: #f3f4f6;
 }
 
+/* Sidebar */
 .sidebar {
-  width: 200px;
-  background: #2c2c2c;
+  width: 220px;
+  background: #1f2937;
   color: white;
   height: 100vh;
   padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
 }
 
 .sidebar button {
   display: block;
   width: 100%;
   margin: 10px 0;
-  padding: 10px;
-  background: #444;
+  padding: 12px;
+  background: #374151;
   border: none;
   color: white;
   cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
 }
 
+.sidebar button:hover {
+  background: #4b5563;
+}
+
+/* Content */
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 30px;
 }
 
-.hidden {
+.tab {
   display: none;
 }
 
+.tab.active {
+  display: block;
+}
+
+/* Cards */
 .cards {
   display: flex;
   gap: 20px;
+  margin-top: 20px;
 }
 
 .cards div {
-  background: #f5f5f5;
+  background: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+  min-width: 150px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+/* Inputs */
+input, textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
+/* Buttons */
+button {
+  padding: 10px 15px;
+  border: none;
+  background: #ec4899;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
+button:hover {
+  background: #db2777;
+}
+
+/* Items */
+.item {
+  background: white;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.item button {
+  margin-right: 5px;
+  margin-top: 10px;
+}
 </style>
 
 </head>
 
 <body>
 
-<div class="admin">
-  <aside class="sidebar">
-    <h2>Админ</h2>
-    <button onclick="showTab('dashboard')">🏠 Главная</button>
-    <button onclick="showTab('stories')">📚 Истории</button>
-    <button onclick="showTab('faq')">💡 Советы</button>
-    <button onclick="showTab('videos')">🎥 Видео</button>
-  </aside>
+<aside class="sidebar">
+  <h2>Админ</h2>
+  <button onclick="showTab('dashboard')">🏠 Главная</button>
+  <button onclick="showTab('stories')">📚 Истории</button>
+  <button onclick="showTab('faq')">💡 Советы</button>
+  <button onclick="showTab('videos')">🎥 Видео</button>
+</aside>
 
-  <main class="content">
-    
-    <!-- Главная -->
-    <section id="dashboard" class="tab">
-      <h2>Статистика</h2>
-      <div class="cards">
-        <div>Истории: <span id="storiesCount">0</span></div>
-        <div>Советы: <span id="faqCount">0</span></div>
-        <div>Видео: <span id="videosCount">0</span></div>
-      </div>
-    </section>
+<main class="content">
 
-    <!-- Истории -->
-    <section id="stories" class="tab hidden">
-      <h2>Истории</h2>
-      <textarea id="storyInput"></textarea>
-      <button onclick="addStory()">Добавить</button>
+  <!-- Главная -->
+  <section id="dashboard" class="tab active">
+    <h2>📊 Статистика</h2>
+    <div class="cards">
+      <div>📚 Истории: <span id="storiesCount">0</span></div>
+      <div>💡 Советы: <span id="faqCount">0</span></div>
+      <div>🎥 Видео: <span id="videosCount">0</span></div>
+    </div>
+  </section>
 
-      <div id="storiesList"></div>
-    </section>
+  <!-- Истории -->
+  <section id="stories" class="tab">
+    <h2>📚 Истории</h2>
 
-    <!-- Советы -->
-    <section id="faq" class="tab hidden">
-      <h2>Советы</h2>
-      <input id="questionInput" placeholder="Вопрос">
-      <textarea id="answerInput"></textarea>
-      <button onclick="addFaq()">Добавить</button>
+    <textarea id="storyText" placeholder="Введите историю"></textarea>
+    <button onclick="addStory()">Добавить</button>
 
-      <div id="faqList"></div>
-    </section>
+    <div id="storiesList"></div>
+  </section>
 
-    <!-- Видео -->
-    <section id="videos" class="tab hidden">
-      <h2>Видео</h2>
-      <input id="videoTitle" placeholder="Название">
-      <input id="videoUrl" placeholder="URL">
-      <button onclick="addVideo()">Добавить</button>
+  <!-- Советы -->
+  <section id="faq" class="tab">
+    <h2>💡 Советы</h2>
 
-      <div id="videosList"></div>
-    </section>
+    <input id="faqQuestion" placeholder="Вопрос">
+    <textarea id="faqAnswer" placeholder="Ответ"></textarea>
+    <button onclick="addFAQ()">Добавить</button>
 
-  </main>
-</div>
+    <div id="faqList"></div>
+  </section>
+
+  <!-- Видео -->
+  <section id="videos" class="tab">
+    <h2>🎥 Видео</h2>
+
+    <input id="videoTitleInput" placeholder="Название видео">
+    <input id="videoUrlInput" placeholder="URL видео">
+    <button onclick="addVideo()">Добавить</button>
+
+    <div id="videosList"></div>
+  </section>
+
+</main>
+
 <script type="module" src="admin.js"></script>
+
+<script>
+function showTab(tabId) {
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.classList.remove("active");
+  });
+
+  document.getElementById(tabId).classList.add("active");
+}
+</script>
 
 </body>
 </html>
+    
