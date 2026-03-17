@@ -5,20 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Помощь женщинам</title>
 <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+
+   
+
+
+    
 <header class="header">
 <div class="logo">
-💗 Помощь Женщинам
+    <img src="images/logo.png" class="logo-img">
+ <span>𐌿᧐ʍ᧐щь жᥱнщᥙнᥲʍ </span>
 </div>
 
 <nav class="nav">
-<a href="#">О нас</a>
-<a href="#">Статьи</a>
-<a href="#">Поддержка</a>
-<button class="contact">Контакт</button>
+<a href="about.html">О нас</a>
+
+<div class="contact-wrapper">
+
+<button class="contact-btn" onclick="toggleContacts()">
+Контакт
+</button>
+
+<div class="contact-dropdown" id="contactDropdown">
+
+<a href="tel:+996 503 200 212" class="contact-item">
+📞 +996 503 200 212
+</a>
+
+<a href="https://t.me/@Sanabar02" target="_blank" class="contact-item">
+💬 Написать в Telegram
+</a>
+
+</div>
+
+</div>
 </nav>
 </header>
 
@@ -27,16 +52,21 @@
 
 <div class="hero-content">
 
-<h1>Помощь женщинам <br> в трудных жизненных ситуациях</h1>
+<h1>𐌿᧐ʍ᧐щь жᥱнщᥙнᥲʍ 
+ <br> ʙ ᴛρудных жᥙɜнᥱнных ᥴᥙᴛуᥲцᥙях
+</h1>
 
 <p>
 Мы рядом, чтобы помочь вам справиться
 с любыми трудностями.
 </p>
 
+<a href="https://docs.google.com/forms/d/1EJzlz4dd8uilu3KuuUYbJLRFFSW1TfFPAczlOwuWcYY/edit" target="_blank">
+  
 <button class="hero-btn">
 Заполнить Анонимный Опрос
 </button>
+</a>
 
 </div>
 
@@ -119,30 +149,11 @@
 </div>
 
 
+
+
 <div id="storiesBox" class="stories-box">
 
-<div class="story">
-<h3>Анонимная история</h3>
-<p>
-Я долго боялась рассказать о своей ситуации.
-Но когда я обратилась за помощью, моя жизнь начала меняться.
-</p>
-</div>
 
-<div class="story">
-<h3>Анонимная история</h3>
-<p>
-Мне казалось, что выхода нет.
-Но поддержка других женщин помогла мне начать новую жизнь.
-</p>
-</div>
-
-<div class="story">
-<h3>Анонимная история</h3>
-<p>
-Самое важное — найти людей, которые готовы поддержать.
-</p>
-</div>
 
 </div>
 
@@ -165,42 +176,32 @@
 </div>
 
 
-<div id="adviceBox" class="advice-box">
+<div id="adviceBox" style="display:none;">
 
-<h3>Что делать при домашнем насилии</h3>
+<div class="faq-item">
+<div class="faq-question"><span>Что делать при домашнем насилии?</span>
 
-<ul>
-<li>Постарайтесь найти безопасное место</li>
-<li>Свяжитесь с близкими или друзьями</li>
-<li>Обратитесь в кризисный центр</li>
-<li>Сохраните важные документы</li>
-<li>При угрозе жизни звоните в полицию</li>
-</ul>
+<span class="faq-arrow">▶</span> 
 
+</div>
 
-<h3>Если вы испытываете психологическое давление</h3>
+<div class="faq-answer">Постарайтесь найти безопасное место и обратитесь за помощью.</div>
+</div>
 
-<ul>
-<li>Не вините себя</li>
-<li>Поговорите с людьми, которым доверяете</li>
-<li>Обратитесь к психологу</li>
-<li>Ведите записи происходящего</li>
-</ul>
+<div class="faq-item">
+<div class="faq-question">Если есть психологическое давление</div>
+<div class="faq-answer">Поговорите с близкими или обратитесь к психологу.</div>
+</div>
 
-
-<h3>Если вы чувствуете сильный стресс</h3>
-
-<p>
-Попробуйте сделать паузу, поговорить с близкими,
-обратиться за профессиональной поддержкой
-и помнить, что вы не обязаны справляться со всем в одиночку.
-</p>
+<div class="faq-item">
+<div class="faq-question">Если сильный стресс</div>
+<div class="faq-answer">Попробуйте сделать паузу и поговорить с людьми, которым доверяете.</div>
+</div>
 
 </div>
 
 
 <!-- Сеансы с психологом -->
-
 <div class="support-item" onclick="openContact('psychologist')">
 
 <div class="support-icon">
@@ -220,6 +221,13 @@
 </div>
 </div>
 
+</div>
+
+
+
+
+
+
 
 <!-- Слайдер картинок -->
 
@@ -229,10 +237,11 @@
 <img src="images/img2.png" class="slide">
 <img src="images/img3.png" class="slide">
 
+
 </div>
 
 
-</div>
+
 </section>
 
 
@@ -242,10 +251,12 @@
 
 <h2>Пройдите анонимный опрос<br>и получите поддержку</h2>
 
+
+<a href="https://docs.google.com/forms/d/1EJzlz4dd8uilu3KuuUYbJLRFFSW1TfFPAczlOwuWcYY/edit" target="_blank">
 <button class="survey-btn">
 Заполнить анонимный опрос
 </button>
-
+</a>
 </div>
 
 </section>
@@ -262,9 +273,7 @@
 
 <div class="video-container">
 
-<video id="storyVideo" controls autoplay muted>
-<source src="videos/video1.mp4" type="video/mp4">
-</video>
+<video id="storyVideo" controls autoplay muted></video>
 
 </div>
 
@@ -334,22 +343,42 @@
 
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 
 
 <div id="contactModal" class="modal">
 
-<div class="modal-content">
+<div class="modal-box">
 
-<h3 id="modalTitle"></h3>
+<span class="modal-close" onclick="closeModal()">×</span>
+
+<h2 id="modalTitle"></h2>
+
+<p class="modal-sub">Выберите удобный способ связи</p>
 
 <div id="modalBody"></div>
 
-<button onclick="closeModal()">Закрыть</button>
+<div class="modal-close-bottom" onclick="closeModal()">×</div>
 
 </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
 
 
 
