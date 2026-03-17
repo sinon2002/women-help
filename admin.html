@@ -5,44 +5,52 @@
 <title>Админ панель</title>
 
 <style>
-
-body{
-font-family:Arial;
-background:#f6e8ec;
-padding:40px;
+  body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
 }
 
-.container{
-max-width:600px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
+.sidebar {
+  width: 200px;
+  background: #2c2c2c;
+  color: white;
+  height: 100vh;
+  padding: 20px;
 }
 
-textarea{
-width:100%;
-height:150px;
-padding:10px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background: #444;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-button{
-margin-top:15px;
-padding:12px 25px;
-border:none;
-background:#e86c8a;
-color:white;
-border-radius:8px;
-cursor:pointer;
+.content {
+  flex: 1;
+  padding: 20px;
 }
 
-button:hover{
-background:#d85c7b;
+.hidden {
+  display: none;
 }
+
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.cards div {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
 
 </style>
 
@@ -50,40 +58,58 @@ background:#d85c7b;
 
 <body>
 
-<div class="container">
+<div class="admin">
+  <aside class="sidebar">
+    <h2>Админ</h2>
+    <button onclick="showTab('dashboard')">🏠 Главная</button>
+    <button onclick="showTab('stories')">📚 Истории</button>
+    <button onclick="showTab('faq')">💡 Советы</button>
+    <button onclick="showTab('videos')">🎥 Видео</button>
+  </aside>
 
-<h2>Добавить историю</h2>
+  <main class="content">
+    
+    <!-- Главная -->
+    <section id="dashboard" class="tab">
+      <h2>Статистика</h2>
+      <div class="cards">
+        <div>Истории: <span id="storiesCount">0</span></div>
+        <div>Советы: <span id="faqCount">0</span></div>
+        <div>Видео: <span id="videosCount">0</span></div>
+      </div>
+    </section>
 
-<textarea id="storyText" placeholder="Введите историю..."></textarea>
+    <!-- Истории -->
+    <section id="stories" class="tab hidden">
+      <h2>Истории</h2>
+      <textarea id="storyInput"></textarea>
+      <button onclick="addStory()">Добавить</button>
 
-<button onclick="addStory()">Добавить</button>
+      <div id="storiesList"></div>
+    </section>
 
-<p id="status"></p>
+    <!-- Советы -->
+    <section id="faq" class="tab hidden">
+      <h2>Советы</h2>
+      <input id="questionInput" placeholder="Вопрос">
+      <textarea id="answerInput"></textarea>
+      <button onclick="addFaq()">Добавить</button>
 
+      <div id="faqList"></div>
+    </section>
 
+    <!-- Видео -->
+    <section id="videos" class="tab hidden">
+      <h2>Видео</h2>
+      <input id="videoTitle" placeholder="Название">
+      <input id="videoUrl" placeholder="URL">
+      <button onclick="addVideo()">Добавить</button>
 
-<h2>Добавить совет</h2>
+      <div id="videosList"></div>
+    </section>
 
-<input id="faqQuestion" placeholder="Введите вопрос">
-
-<textarea id="faqAnswer" placeholder="Введите ответ"></textarea>
-
-<button onclick="addFAQ()">Добавить совет</button>
-
-<p id="faqStatus"></p>
-
+  </main>
 </div>
-
-
-
-<h2>Добавить видео</h2>
-
-<input id="videoTitleInput" placeholder="Название видео">
-
-<input id="videoUrlInput" placeholder="URL видео">
-
-<button onclick="addVideo()">Добавить видео</button>
-
 <script type="module" src="admin.js"></script>
 
 </body>
