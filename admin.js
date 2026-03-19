@@ -221,10 +221,43 @@ function renderVideos(snapshot) {
   snapshot.forEach((docSnap) => {
     const data = docSnap.data();
 
+    let videoHtml = "";
+
+    // 🎬 YouTube
+    if (data.url.includes("youtube.com") || data.url.includes("youtu.be")) {
+
+      let videoId = "";
+
+      if (data.url.includes("v=")) {
+        videoId = data.url.split("v=")[1].split("&")[0];
+      } else {
+        videoId = data.url.split("/").pop();
+      }
+
+      videoHtml = `
+        <iframe width="300" height="200"
+          src="https://www.youtube.com/embed/${videoId}"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      `;
+    }
+
+    // 📸 Instagram (пока ссылка)
+    else if (data.url.includes("instagram.com")) {
+      videoHtml = `<a href="${data.url}" target="_blank">Открыть Instagram</a>`;
+    }
+
+    // 📁 Обычное видео (mp4)
+    else {
+      videoHtml = `<video width="300" controls src="${data.url}"></video>`;
+    }
+
     list.innerHTML += `
       <div class="item">
         <b>${data.title}</b>
-        <video width="300" controls src="${data.url}"></video>
+        <br>
+        ${videoHtml}
         <br>
         <button onclick="deleteVideo('${docSnap.id}')">🗑</button>
         <button onclick="editVideo('${docSnap.id}', \`${data.title}\`, \`${data.url}\`)">✏️</button>
@@ -232,7 +265,6 @@ function renderVideos(snapshot) {
     `;
   });
 }
-
 window.deleteVideo = async function (id) {
   await deleteDoc(doc(db, "videos", id));
   loadData();
