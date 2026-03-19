@@ -135,12 +135,12 @@ document.getElementById("contactModal").style.display="none";
 
 let videos = []
 let videoIndex = 0
-let video
+let container
 let title
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-video = document.getElementById("storyVideo")
+container = document.getElementById("videoContainer")
 title = document.getElementById("videoTitle")
 
 const querySnapshot = await getDocs(collection(db,"videos"))
@@ -157,12 +157,47 @@ title: data.title
 })
 
 if(videos.length > 0){
-video.src = videos[0].url
-title.textContent = videos[0].title
+showVideo(0)
 }
 
 })
 
+function showVideo(index){
+
+const data = videos[index]
+
+let videoHtml = ""
+
+// 🎬 YouTube
+if (data.url.includes("youtube.com") || data.url.includes("youtu.be")) {
+
+let videoId = ""
+
+if (data.url.includes("v=")) {
+videoId = data.url.split("v=")[1].split("&")[0]
+} else {
+videoId = data.url.split("/").pop()
+}
+
+videoHtml = `
+<iframe width="100%" height="300"
+src="https://www.youtube.com/embed/${videoId}"
+frameborder="0"
+allowfullscreen>
+</iframe>
+`
+}
+
+// 📁 обычное видео
+else {
+videoHtml = `<video width="100%" controls src="${data.url}"></video>`
+}
+
+container.innerHTML = videoHtml
+title.textContent = data.title
+}
+
+// 👉 NEXT
 window.nextVideo = function(){
 
 videoIndex++
@@ -171,13 +206,11 @@ if(videoIndex >= videos.length){
 videoIndex = 0
 }
 
-video.src = videos[videoIndex].url
-video.load()
-
-title.textContent = videos[videoIndex].title
+showVideo(videoIndex)
 
 }
 
+// 👉 PREV
 window.prevVideo = function(){
 
 videoIndex--
@@ -186,44 +219,9 @@ if(videoIndex < 0){
 videoIndex = videos.length - 1
 }
 
-video.src = videos[videoIndex].url
-video.load()
-
-title.textContent = videos[videoIndex].title
+showVideo(videoIndex)
 
 }
-
-
-
-
-
-window.toggleAdvice = function(){
-
-const box = document.getElementById("adviceBox");
-
-if(box.style.display === "block"){
-box.style.display = "none"
-}else{
-box.style.display = "block"
-}
-
-}
-
-window.prevVideo = function(){
-
-videoIndex--
-
-if(videoIndex < 0){
-videoIndex = videos.length - 1
-}
-
-video.src = videos[videoIndex].url
-video.load()
-
-title.textContent = videos[videoIndex].title
-
-}
-
 
 
 
