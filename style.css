@@ -1138,4 +1138,30 @@ canvas {
 }
 
 
+/* контейнер */
+#videoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+/* ОБЩЕЕ */
+#videoContainer iframe,
+#videoContainer video {
+  border-radius: 15px;
+  background: black;
+}
+
+/* горизонтальные */
+.video-horizontal {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+}
+
+/* вертикальные */
+.video-vertical {
+  width: 320px;
+  height: 570px;
+}
