@@ -196,6 +196,7 @@ if (data.url.includes("shorts")) {
 videoClass = "video-vertical"
 }
 
+// 🎬 YouTube
 videoHtml = `
 <iframe class="${videoClass}"
 src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
@@ -204,10 +205,11 @@ allow="autoplay"
 allowfullscreen>
 </iframe>
 `
-}
 
 // 📁 обычное видео
-else {
+videoHtml = `
+<video class="${videoClass}" autoplay muted playsinline controls src="${data.url}"></video>
+`
 
 // 👉 если вертикальное видео (примерно определяем)
 videoClass = "video-horizontal"
