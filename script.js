@@ -83,7 +83,7 @@ title.innerText="Группа поддержки"
 
 body.innerHTML=`
 
-<a class="modal-btn telegram-btn" href="https://t.me/yourgroup" target="_blank">
+<a class="modal-btn telegram-btn" https://t.me/Koopsuzayalkuchtuukoom1" target="_blank">
 ✈️ Открыть Telegram группу
 </a>
 
