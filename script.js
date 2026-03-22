@@ -64,11 +64,11 @@ if(type === "lawyer"){
 title.innerText="Юридическая помощь"
 
 body.innerHTML=`
-<a class="modal-btn call-btn" href="tel:+996700000111">
+<a class="modal-btn call-btn" href="tel:+996 503 200 212">
 📞 Позвонить сейчас
 </a>
 
-<a class="modal-btn whatsapp-btn" href="https://wa.me/996700000111" target="_blank">
+<a class="modal-btn whatsapp-btn" href="https://wa.me/+996 503 200 212" target="_blank">
 💬 Чат в WhatsApp
 </a>
 `
