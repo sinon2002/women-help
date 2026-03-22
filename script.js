@@ -260,7 +260,15 @@ loadStories();
 
 
 
+function toggleAdvice() {
+  const box = document.getElementById("adviceBox");
 
+  if (box.style.display === "none" || box.style.display === "") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
 
 
 
