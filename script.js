@@ -162,25 +162,42 @@ showVideo(0)
 
 })
 
+
+
+
 function showVideo(index){
 
 const data = videos[index]
 
 let videoHtml = ""
+let videoClass = "video-horizontal"
 
 // 🎬 YouTube
 if (data.url.includes("youtube.com") || data.url.includes("youtu.be")) {
 
 let videoId = ""
 
+// обычная ссылка
 if (data.url.includes("v=")) {
 videoId = data.url.split("v=")[1].split("&")[0]
-} else {
+}
+// короткая ссылка
+else if (data.url.includes("youtu.be")) {
 videoId = data.url.split("/").pop()
+}
+// shorts
+else if (data.url.includes("shorts")) {
+videoId = data.url.split("shorts/")[1].split("?")[0]
+videoClass = "video-vertical"
+}
+
+// 👉 если это shorts — делаем вертикально
+if (data.url.includes("shorts")) {
+videoClass = "video-vertical"
 }
 
 videoHtml = `
-<iframe width="100%" height="300"
+<iframe class="${videoClass}"
 src="https://www.youtube.com/embed/${videoId}"
 frameborder="0"
 allowfullscreen>
@@ -190,41 +207,19 @@ allowfullscreen>
 
 // 📁 обычное видео
 else {
-videoHtml = `<video width="100%" controls src="${data.url}"></video>`
+
+// 👉 если вертикальное видео (примерно определяем)
+videoClass = "video-horizontal"
+
+videoHtml = `
+<video class="${videoClass}" controls src="${data.url}"></video>
+`
 }
 
 container.innerHTML = videoHtml
 title.textContent = data.title
-}
-
-// 👉 NEXT
-window.nextVideo = function(){
-
-videoIndex++
-
-if(videoIndex >= videos.length){
-videoIndex = 0
-}
-
-showVideo(videoIndex)
 
 }
-
-// 👉 PREV
-window.prevVideo = function(){
-
-videoIndex--
-
-if(videoIndex < 0){
-videoIndex = videos.length - 1
-}
-
-showVideo(videoIndex)
-
-}
-
-
-
 
 
 
