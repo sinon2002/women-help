@@ -163,8 +163,6 @@ showVideo(0)
 })
 
 
-
-
 function showVideo(index){
 
 const data = videos[index]
@@ -177,45 +175,36 @@ if (data.url.includes("youtube.com") || data.url.includes("youtu.be")) {
 
 let videoId = ""
 
-// обычная ссылка
+// разные форматы ссылок
 if (data.url.includes("v=")) {
 videoId = data.url.split("v=")[1].split("&")[0]
 }
-// короткая ссылка
 else if (data.url.includes("youtu.be")) {
 videoId = data.url.split("/").pop()
 }
-// shorts
 else if (data.url.includes("shorts")) {
 videoId = data.url.split("shorts/")[1].split("?")[0]
 videoClass = "video-vertical"
 }
 
-// 👉 если это shorts — делаем вертикально
-if (data.url.includes("shorts")) {
-videoClass = "video-vertical"
-}
-
-// 🎬 YouTube
+// autoplay + mute
 videoHtml = `
 <iframe class="${videoClass}"
-src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
+src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1"
 frameborder="0"
-allow="autoplay"
+allow="autoplay; encrypted-media"
 allowfullscreen>
 </iframe>
 `
+}
 
 // 📁 обычное видео
-videoHtml = `
-<video class="${videoClass}" autoplay muted playsinline controls src="${data.url}"></video>
-`
-
-// 👉 если вертикальное видео (примерно определяем)
-videoClass = "video-horizontal"
+else {
 
 videoHtml = `
-<video class="${videoClass}" autoplay muted playsinline controls src="${data.url}"></video>
+<video class="${videoClass}" autoplay muted playsinline controls>
+<source src="${data.url}" type="video/mp4">
+</video>
 `
 }
 
@@ -223,6 +212,7 @@ container.innerHTML = videoHtml
 title.textContent = data.title
 
 }
+
 
 
 
