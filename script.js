@@ -561,3 +561,18 @@ function onWindowResize() {
 }
 
 init();
+
+
+
+
+
+window.nextVideo = function(){
+  console.log("NEXT нажали")
+  videoIndex++
+
+  if(videoIndex >= videos.length){
+    videoIndex = 0
+  }
+
+  showVideo(videoIndex)
+}
