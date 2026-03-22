@@ -212,7 +212,7 @@ else {
 videoClass = "video-horizontal"
 
 videoHtml = `
-<video class="${videoClass}" controls src="${data.url}"></video>
+<video class="${videoClass}" autoplay muted playsinline controls src="${data.url}"></video>
 `
 }
 
