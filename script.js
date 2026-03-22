@@ -260,7 +260,8 @@ loadStories();
 
 
 
-function toggleAdvice() {
+window.toggleAdvice = function() {
+
   const box = document.getElementById("adviceBox");
 
   if (box.style.display === "none" || box.style.display === "") {
@@ -268,8 +269,8 @@ function toggleAdvice() {
   } else {
     box.style.display = "none";
   }
-}
 
+}
 
 
 
