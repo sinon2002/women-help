@@ -1138,7 +1138,6 @@ canvas {
 }
 
 
-/* контейнер */
 #videoContainer {
   width: 100%;
   display: flex;
@@ -1149,8 +1148,18 @@ canvas {
 /* ОБЩЕЕ */
 #videoContainer iframe,
 #videoContainer video {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
   border-radius: 15px;
   background: black;
+  object-fit: contain;
+}
+
+/* ВЕРТИКАЛЬНЫЕ */
+.video-vertical {
+  width: 320px !important;
+  height: 570px !important;
 }
 
 /* горизонтальные */
@@ -1160,8 +1169,4 @@ canvas {
   height: 500px;
 }
 
-/* вертикальные */
-.video-vertical {
-  width: 320px;
-  height: 570px;
-}
+
