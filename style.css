@@ -676,15 +676,15 @@ color:#e86c8a;
 
 }
 
-.footer-social{
-
-display:flex;
-
-gap:10px;
-
+.footer-socials {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-.footer-social img{
+
+.footer-socials img{
 
 width:34px;
 
@@ -700,7 +700,7 @@ transition:0.3s;
 
 }
 
-.footer-social img:hover{
+.footer-socials img:hover{
 
 transform:scale(1.1);
 
