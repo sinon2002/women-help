@@ -76,38 +76,34 @@ body.innerHTML=`
 }
 
 
-
 if(type === "group"){
 
-title.innerText="Группа поддержки"
+title.innerText = "Группа поддержки"
 
 body.innerHTML = `
 
 <a class="modal-btn telegram-btn" 
 href="https://t.me/Koopsuzayalkuchtuukoom1" 
 target="_blank">
-📢 Открыть TELEGRAM группу
+✈️ Открыть Telegram группу
 </a>
 
-<div style="text-align:center; margin:15px 0;">— OR —</div>
+<div class="modal-divider">
+------ OR ------
+</div>
 
 <a class="modal-btn question-btn" 
-href="https://t.me/abdyldabekovaalb" 
+href="https://t.me/abdyldabekovaalb?text=Здравствуйте, хочу задать вопрос" 
 target="_blank">
 💬 Задать вопрос
 </a>
-
-`
 
 <div class="modal-cancel" onclick="closeModal()">
 Отмена
 </div>
 
 `
-
-
 }
-
 modal.style.display="flex"
 }
 
