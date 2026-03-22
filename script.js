@@ -198,8 +198,9 @@ videoClass = "video-vertical"
 
 videoHtml = `
 <iframe class="${videoClass}"
-src="https://www.youtube.com/embed/${videoId}"
+src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
 frameborder="0"
+allow="autoplay"
 allowfullscreen>
 </iframe>
 `
