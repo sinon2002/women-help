@@ -23,6 +23,18 @@ font-weight:600;
 color:#e86a87;
 }
 
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-link:hover {
+  opacity: 0.8;
+}
 .logo-img{
 width:72px;
 height:72px;
