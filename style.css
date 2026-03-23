@@ -1190,4 +1190,7 @@ canvas {
   height: 500px;
 }
 
-
+.item iframe{
+  border-radius:20px;
+  background:black;
+}
