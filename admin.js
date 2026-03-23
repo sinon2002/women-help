@@ -244,9 +244,27 @@ function renderVideos(snapshot) {
     }
 
     // 📸 Instagram (пока ссылка)
-    else if (data.url.includes("instagram.com")) {
-      videoHtml = `<a href="${data.url}" target="_blank">Открыть Instagram</a>`;
-    }
+  else if (data.url.includes("instagram.com")) {
+
+  let embedUrl = data.url;
+
+  // убираем лишний слэш в конце
+  if (embedUrl.endsWith("/")) {
+    embedUrl = embedUrl.slice(0, -1);
+  }
+
+  // добавляем /embed
+  embedUrl = embedUrl + "/embed";
+
+  videoHtml = `
+    <iframe width="300" height="500"
+      src="${embedUrl}"
+      frameborder="0"
+      scrolling="no"
+      allowfullscreen>
+    </iframe>
+  `;
+}
 
     // 📁 Обычное видео (mp4)
     else {
